@@ -1,0 +1,59 @@
+{% extends 'trialapp/imageuploadhead.html' %}
+
+{% block content %}
+<label for = "DispName" style="align:right">
+</label>
+
+ <div class="card white" >
+    <div class="card-content black-text" >
+		<div class="split left">
+			<div class="grid-example col s12 m6 l4" style="color:#4c4a37;font-family:'Source Sans Pro',sans-serif;font-size:18px;line-height:32px;margin: 0 0 24px;">
+			<h5>Instructions:</h5>
+			<p>1. File should be in .jpeg format if not then use following link for conversion :</p>
+			<a class="nav-link" href="https://www.coolutils.com/online/DICOM-to-JPG#">Convert</a>
+			<p>2. Upload the similar image from your scanned CT images as given in sample image below.</p>
+                <br>
+			<p><img src="F:\\BEProject\\Images\\Cancer_1.jpg" alt="Cancer" style="width:200px;height:200px;align:center"></p>
+			</div>
+		</div>
+
+		<div class="split right">
+			<div class="grid-example col s12 m6 l4">
+				 <div class="container" >
+					<div class="row">
+					   <div class="col-sm-50 col-md-50 col-lg-50 mx-auto" size="50% 50% 50%">
+							<div class="card card-signin my-5" style="align:center">
+								<div class="card-body" >
+									<form method="post" enctype="multipart/form-data" action=" ">
+										{% csrf_token %}
+										{% for field in form %}
+										<div class="form-label-group" style="width:100%">
+										<p>
+											{{ field.label_tag }}<br>
+
+											{{ field }}
+											{% if field.help_text %}
+												<small style="color: grey">{{ field.help_text }}</small>
+											{% endif %}
+											{% for error in field.errors %}
+												<p style="color: red">{{ error }}</p>
+											{% endfor %}
+										</p>
+										</div>
+										{% endfor %}
+                                        <br><br>
+                                        <input class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" value="Upload" name="button1" style="align:left">
+									</form>
+									<br>
+								</div>
+							</div>
+							<br><br><br><br><br>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+</div>
+{% endblock %}

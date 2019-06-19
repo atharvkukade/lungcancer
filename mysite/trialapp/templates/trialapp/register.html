@@ -1,0 +1,32 @@
+{% extends 'trialapp/registerationhead.html' %}
+
+{% block content %}
+              <div class="col-sm-25 col-md-50 col-lg-25 mx-auto" style="width: 38rem;">
+                <div class="card card-signin my-5" style="width:100%">
+                  <div class="card-body" style="width:100%">
+                    <h2 class="card-title text-center">Registration Form</h2><br>
+                    <form class="form-signin" action=" " method="post">
+                      {% csrf_token %}
+                      {% for field in form %}
+                            <div class="form-label-group" style="width:100%">
+                                <p>
+                                    {{ field.label_tag }}<br>
+
+                                    {{ field }}
+                                    {% if field.help_text %}
+                                        <small style="color: grey">{{ field.help_text }}</small>
+                                    {% endif %}
+                                    {% for error in field.errors %}
+                                        <p style="color: red">{{ error }}</p>
+                                    {% endfor %}
+                                </p>
+                            </div>
+                      {% endfor %}
+        <!-- SUBMIT -->
+
+                      <input class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" value="Register" name="button1">
+                    </form>
+                  </div>
+                </div>
+              </div>
+{% endblock %}

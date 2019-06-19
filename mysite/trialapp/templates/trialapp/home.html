@@ -1,0 +1,36 @@
+{% extends 'trialapp/head.html' %}
+
+
+{% block content %}
+
+
+      <div class="col-sm-9 col-md-15 col-lg-4 mx-auto" class = "align:center">
+        <div class="card card-signin my-5"><br>
+          <h5 class="card-title text-center">Login</h5><br>
+          <div class="card-body">
+            <form class="form-signin" action=" " method="post">
+              {% csrf_token %}
+              {% for field in form %}
+                  <div class="form-label-group" style="width:100%">
+                        <p>
+                            {{ field.label_tag }}<br>
+
+                            {{ field }}
+                            {% if field.help_text %}
+                                <small style="color: grey">{{ field.help_text }}</small>
+                            {% endif %}
+                            {% for error in field.errors %}
+                                <p style="color: red">{{ error }}</p>
+                            {% endfor %}
+                        </p>
+                  </div>
+              {% endfor %}
+               <input class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" value="Login" name="button1"><hr class="my-4">
+            </form>
+          </div>
+        </div>
+      </div>
+
+{% endblock %}
+
+

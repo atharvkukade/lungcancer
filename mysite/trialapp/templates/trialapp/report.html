@@ -1,0 +1,77 @@
+{% extends 'trialapp/reporthead.html' %}
+
+{% block content %}
+    <div class="card white">
+            <div class="card-content black-text">
+                <div class="grid-example col s12 m6 l4" style="color:#4c4a37;font-family:'Source Sans Pro',sans-serif;font-size:18px;line-height:32px;margin: 0 0 24px;">
+                    <div class="split left">
+                        <div class="card" style="width: 40rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">Basic Information</h5>
+                                Name:<label class="form-control" type="text" placeholder="Name" readonly>{{User.name}} </label>
+                                Date of Birth:<label class="form-control" type="text" placeholder="Date of Birth" readonly>{{User.dateofbirth}} </label>
+                                Gender:<label class="form-control" type="text" placeholder="Gender" readonly>{{Patient.gender}} </label>
+                                Blood Group:<label class="form-control" type="text" placeholder="Blood Group" readonly>{{Patient.bloodgroup}} </label>
+                                Weight:<label class="form-control" type="text" placeholder="Weight" readonly>{{Patient.height}}</label>
+                                Height:<label class="form-control" type="text" placeholder="Height" readonly>{{Patient.weight}}</label>
+                                E-mail:<label class="form-control" type="text" placeholder="E-mail" readonly>{{User.email}}</label>
+                                Phone Number:<label class="form-control" type="text" placeholder="Phone Number" readonly>{{User.phoneno}}</label>
+                                City:<label class="form-control" type="text" placeholder="City" readonly>{{User.city}}</label>
+                                State:<label class="form-control" type="text" placeholder="State" readonly>{{User.state}}</label>
+                            </div>
+                        </div>
+                        <div class="card" style="width:40rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">Doctor's Report</h5>
+                                <div class="form-group shadow-textarea" >
+                                    <form class="form-signin" action=" " method="post">
+                                        {% csrf_token %}
+                                        {% for field in form %}
+                                            <div class="form-label-group" style="width:100%">
+                                                    <p>
+                                                        {{ field.label_tag }}<br>
+
+                                                        {{ field }}
+                                                        {% if field.help_text %}
+                                                            <small style="color: grey">{{ field.help_text }}</small>
+                                                        {% endif %}
+                                                        {% for error in field.errors %}
+                                                            <p style="color: blue">{{ error }}</p>
+                                                        {% endfor %}
+                                                    </p>
+                                            </div>
+                                          {% endfor %}
+                                          <input class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" value="Submit Report" name="button1">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="split right">
+                        <div class="card" style="width: 40rem;">
+                            <div class="card-body" style="text-align:center">
+                                <h5 class="card-title">Image</h5>
+                                <img src="{{ Image.image.url }}"  alt="CT_Image" width="500" height="500">
+
+                            </div>
+                        </div>
+                        <div class="card" style="width:40rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">System Extracted Output</h5>
+                                totalNumberOfWhiteSpots<label class="form-control" type="text" placeholder="totalNumberOfWhiteSpots" readonly>{{Image.totalnoofwhitespots}}</label>
+                                totalWhiteSpotArea<label class="form-control" type="text" placeholder="totalWhiteSpotArea" readonly>{{Image.totalwhitespotarea}}</label>
+                                totalWhiteSpotLength<label class="form-control" type="text" placeholder="totalWhiteSpotLength" readonly>{{Image.totalwhitespotlength}}</label>
+                                totalWhiteAreaLessThanThirtyFivePixel<label class="form-control" type="text" placeholder="totalWhiteAreaLessThanThirtyFivePixel" readonly>{{Image.totalwhitearealessthanthirtyfivepixel}}</label>
+                                totalWhiteAreaGreaterThanThirtyFivePixel<label class="form-control" type="text" placeholder="totalWhiteAreaGreaterThanThirtyFivePixel" readonly>{{Image.totalwhiteareagreaterthanthirtyfivepixel}}</label>
+                                totalWhiteAreaGreaterThanHundredPixel<label class="form-control" type="text" placeholder="totalWhiteAreaGreaterThanHundredPixel" readonly>{{Image.totalwhiteareagreaterthanhundredpixel}}</label>
+                                MaxWhiteSpotArea<label class="form-control" type="text" placeholder="MaxWhiteSpotArea" readonly>{{Image.maxwhitespotarea}} </label>
+                                MinWhiteSpotArea<label class="form-control" type="text" placeholder="MinWhiteSpotArea" readonly>{{Image.minwhitespotarea}}</label>
+                                systemPredictedStage<label class="form-control" type="text" placeholder="systemPredictedStage" readonly>{{Image.systempredictedstage}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+{% endblock %}
+

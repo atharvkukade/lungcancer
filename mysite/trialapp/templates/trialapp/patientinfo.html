@@ -1,0 +1,69 @@
+{% extends 'trialapp/patientinfohead.html' %}
+
+{% block content %}
+  <div class="card white">
+    <div class="card-content black-text">
+		<div class="grid-example col s12 m6 l4" style="color:#4c4a37;font-family:'Source Sans Pro',sans-serif;font-size:18px;line-height:32px;margin: 0 0 24px;">
+			<div class="split left">
+				<div class="card" style="width: 40rem;">
+					<div class="card-body">
+						<h5 class="card-title">Basic Information</h5>
+						Name:<label class="form-control" type="text" placeholder="Name" readonly>{{User.name}} </label>
+						Date of Birth:<label class="form-control" type="text" placeholder="Date of Birth" readonly>{{User.dateofbirth}} </label>
+						Gender:<label class="form-control" type="text" placeholder="Gender" readonly>{{Patient.gender}} </label>
+						Blood Group:<label class="form-control" type="text" placeholder="Blood Group" readonly>{{Patient.bloodgroup}} </label>
+						Weight:<label class="form-control" type="text" placeholder="Weight" readonly>{{Patient.weight}} </label>
+						Height:<label class="form-control" type="text" placeholder="Height" readonly>{{Patient.height}} </label>
+					</div>
+				</div>
+				<div class="card" style="width: 40rem;">
+					<div class="card-body">
+						<h5 class="card-title">Contact Details</h5>
+						E-mail:<label class="form-control" type="text" placeholder="E-mail" readonly>{{User.email}} </label>
+						Phone Number:<label class="form-control" type="text" placeholder="Phone Number" readonly>{{User.phoneno}} </label>
+						City:<label class="form-control" type="text" placeholder="City" readonly>{{User.city}} </label>
+						State:<label class="form-control" type="text" placeholder="State" readonly>{{User.state}} </label>
+					</div>
+				</div>
+			</div>
+			<div class="split right">
+				<div class="card" style="width: 40rem;">
+					<div class="card-body">
+						<h5 class="card-title">Doctor Details</h5>
+						Name:<label class="form-control" type="text" placeholder="Name" readonly>{{Doctor.name}}</label>
+						E-mail:<label class="form-control" type="text" placeholder="E-mail" readonly>{{Doctor.email}}</label>
+						Phone Number:<label class="form-control" type="text" placeholder="Phone Number" readonly>{{Doctor.phoneno}}</label>
+						City:<label class="form-control" type="text" placeholder="City" readonly>{{Doctor.city}}</label>
+						State:<label class="form-control" type="text" placeholder="State" readonly>{{Doctor.state}}</label>
+					</div>
+				</div>
+				<div class="card" style="width: 40rem;">
+					<div class="card-body">
+						<h5 class="card-title">Status</h5>
+						{% if Docreport == None %}
+                        	<p>System Report is generated successfully. Soon Doctor will send Report.</p>
+                        {% else %}
+							{% for field in Docreport %}
+                            	<div class="form-label-group" style="width:100%">
+									<p>
+                                    	{{ field.label_tag }}<br>
+
+                                        {{ field }}
+                                        {% if field.help_text %}
+                                        	<small style="color: grey">{{ field.help_text }}</small>
+                                        {% endif %}
+                                        {% for error in field.errors %}
+                                        	<p style="color: red">{{ error }}</p>
+                                        {% endfor %}
+                                    </p>
+                                </div>
+                            {% endfor %}
+						{% endif %}
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+  </div>
+{% endblock %}

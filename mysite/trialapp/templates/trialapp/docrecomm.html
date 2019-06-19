@@ -1,0 +1,54 @@
+{% extends 'trialapp/docrecommhead.html' %}
+
+{% block content %}
+    <br>
+    <div class="card" style="width: 50rem;margin: 0 auto; float: none; margin-bottom: 10px;">
+        <div class="card-body">
+            <h5 class="card-title">Recommended Oncologist</h5>
+            <div class="row">
+                <div class="col-sm-6">
+                    <p class="card-text">Name: </p>
+                    <p class="card-text">Phone no: </p>
+                    <p class="card-text">E-mail: </p>
+                    <p class="card-text">Address:</p>
+                </div>
+                <div class="col-sm-6">
+                    <p class="card-text">{{Doctor.name}}</p>
+                    <p class="card-text">{{Doctor.phoneno}}</p>
+                    <p class="card-text">{{Doctor.email}}</p>
+                    <p class="card-text">{{Doctor.city}},{{Doctor.state}}</p>
+                </div>
+            </div>
+            Note : Recommendation is based on your loaction and ratings given by patients.
+        </div>
+    </div>
+
+    <div class="card" style="width: 50rem;margin: 0 auto; float: none; margin-bottom: 10px;">
+        <div class="card-body" style="align:left">
+            <h5 class="card-title">Select Doctor</h5>
+            <p class="card-text">Select the doctor from following list:</p>
+            <div class="dropdown">
+                <form class="form-signin" method="post" action=" ">
+                    {% csrf_token %}
+                      {% for field in form %}
+                            <div class="form-label-group" style="width:100%">
+                                <p>
+                                    {{ field.label_tag }}<br>
+
+                                    {{ field }}
+                                    {% if field.help_text %}
+                                        <small style="color: grey">{{ field.help_text }}</small>
+                                    {% endif %}
+                                    {% for error in field.errors %}
+                                        <p style="color: red">{{ error }}</p>
+                                    {% endfor %}
+                                </p>
+                            </div>
+                      {% endfor %}
+                    <input class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" value="Next" name="button1">
+                </form>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

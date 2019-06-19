@@ -1,0 +1,28 @@
+{% extends 'trialapp/docdashhead.html' %}
+
+
+{% block content %}
+    <div class="p-4">
+        {% for subPatList in Patients %}
+          <div class="row">
+              {% for patId,patStage in subPatList %}
+                <div class="col s12 m6 ">
+                      <div class="card blue-grey darken-1">
+                          <form method="post" action=" ">
+                            {% csrf_token %}
+                            <div class="card-content white-text">
+                              <span class="card-title">{{patId}}</span>
+                              <p>Stage : {{patStage}}</p>
+                            </div>
+                            <input type="text" value={{patId}} name="patientId1" hidden>
+                            <div class="card-action">
+                              <input type="submit" value="View" class="form-control">
+                            </div>
+                          </form>
+                      </div>
+                </div>
+              {% endfor %}
+          </div>
+        {% endfor %}
+    </div>
+{% endblock %}
